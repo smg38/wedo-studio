@@ -1,0 +1,39 @@
+meta:
+  format: wedo-studio-v2
+  version: 2.5.0
+  author: @smg38
+  created: '2026-09-04T17:12:44.829Z'
+  description: Богомол
+blocks:
+  - type: Управление.Когда щелкнут по флагу
+    line: 1
+  - type: Свет.LED цвет
+    line: 2
+    COLOR_NAME: '10'
+  - type: Циклы.Повторить
+    line: 3
+    TIMES: 10
+    DO:
+      - type: Моторы.Мотор включить
+        line: 4
+        PORT: '1'
+        SPEED: 50
+      - type: Логика.Ждать
+        line: 5
+        SECONDS: 1
+      - type: Свет.LED цвет
+        line: 6
+        COLOR_NAME: '5'
+      - type: Моторы.Мотор включить
+        line: 7
+        PORT: '1'
+        SPEED: -50
+      - type: Логика.Ждать
+        line: 8
+        SECONDS: 1
+      - type: Свет.LED цвет
+        line: 9
+        COLOR_NAME: '10'
+  - type: Моторы.Мотор выключить
+    line: 10
+    PORT: '1'

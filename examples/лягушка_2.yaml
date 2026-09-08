@@ -1,0 +1,37 @@
+meta:
+  format: wedo-studio-v2
+  version: 2.5.0
+  author: @smg38
+  created: '2026-09-05T14:31:14.796Z'
+  description: Лягушка 2
+blocks:
+  - type: Управление.Когда щелкнут по флагу
+    line: 1
+  - type: Управление.Подключить хаб
+    line: 2
+  - type: Циклы.Повторить
+    line: 3
+    TIMES: 2
+    DO:
+      - type: Свет.LED цвет (число)
+        line: 4
+        COLOR: 1
+      - type: Логика.Ждать
+        line: 5
+        SECONDS: 1
+      - type: Моторы.Мотор включить
+        line: 6
+        PORT: '1'
+        SPEED: 50
+      - type: Логика.Ждать
+        line: 7
+        SECONDS: 1
+      - type: Моторы.Мотор выключить
+        line: 8
+        PORT: '1'
+      - type: Логика.Ждать
+        line: 9
+        SECONDS: 1
+      - type: Свет.LED цвет
+        line: 10
+        COLOR_NAME: '0'

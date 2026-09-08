@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="miniGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4C97FF" />
+      <stop offset="100%" stop-color="#7B4CFF" />
+    </linearGradient>
+    <style>
+      @keyframes miniSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes miniPulse {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+      .mini-gear { animation: miniSpin 4s linear infinite; transform-origin: 16px 16px; }
+      .mini-dot { animation: miniPulse 1.5s ease-in-out infinite; }
+      .mini-dot:nth-child(2) { animation-delay: 0.5s; }
+      .mini-dot:nth-child(3) { animation-delay: 1s; }
+    </style>
+  </defs>
+  
+  <rect width="32" height="32" rx="8" fill="#1a1a2e"/>
+  
+  <g class="mini-gear">
+    <!-- Правильный шестиугольник -->
+    <polygon points="16,5 25.5,10.5 25.5,21.5 16,27 6.5,21.5 6.5,10.5" 
+             fill="url(#miniGrad)" 
+             stroke="#4C97FF" 
+             stroke-width="1.5"/>
+  </g>
+  
+  <circle cx="16" cy="16" r="5" fill="white"/>
+  
+  <!-- Код с закруглениями -->
+  <path d="M12.5,13.5 L10,16 L12.5,18.5" 
+        stroke="#1a1a2e" stroke-width="2" 
+        fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19.5,13.5 L22,16 L19.5,18.5" 
+        stroke="#1a1a2e" stroke-width="2" 
+        fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <circle class="mini-dot" cx="16" cy="8" r="2" fill="#2ECC71"/>
+  <circle class="mini-dot" cx="24" cy="13.5" r="2" fill="#2ECC71"/>
+  <circle class="mini-dot" cx="8" cy="13.5" r="2" fill="#2ECC71"/>
+</svg>

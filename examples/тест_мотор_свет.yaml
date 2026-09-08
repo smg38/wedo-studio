@@ -1,0 +1,78 @@
+meta:
+  format: wedo-studio-v2
+  version: 2.5.0
+  author: @smg38
+  created: '2026-09-06T11:24:32.637Z'
+  description: Тест мотор+свет
+blocks:
+  - type: Управление.Когда щелкнут по флагу
+    line: 1
+  - type: Управление.Подключить хаб
+    line: 2
+  - type: Свет.LED цвет
+    line: 3
+    COLOR_NAME: '1'
+  - type: Логика.Ждать
+    line: 4
+    SECONDS: 0.2
+  - type: Переменные.Присвоить
+    line: 5
+    VAR: цвет
+    VALUE: 0
+  - type: Переменные.Присвоить
+    line: 6
+    VAR: мотор
+    VALUE: 0
+  - type: Циклы.Повторить
+    line: 7
+    TIMES: 10
+    DO:
+      - type: Свет.LED цвет (число)
+        line: 8
+        COLOR: '{цвет}'
+      - type: Моторы.Мотор включить
+        line: 9
+        PORT: '1'
+        SPEED: '{мотор}'
+      - type: Переменные.Увеличить
+        line: 10
+        VAR: цвет
+        DELTA: 1
+      - type: Переменные.Увеличить
+        line: 11
+        VAR: мотор
+        DELTA: 10
+      - type: Логика.Ждать
+        line: 12
+        SECONDS: 0.5
+  - type: Логика.Ждать
+    line: 13
+    SECONDS: 0.5
+  - type: Циклы.Повторить
+    line: 14
+    TIMES: 10
+    DO:
+      - type: Свет.LED цвет (число)
+        line: 15
+        COLOR: '{цвет}'
+      - type: Моторы.Мотор включить
+        line: 16
+        PORT: '1'
+        SPEED: '{мотор}'
+      - type: Переменные.Увеличить
+        line: 17
+        VAR: цвет
+        DELTA: -1
+      - type: Переменные.Увеличить
+        line: 18
+        VAR: мотор
+        DELTA: -20
+      - type: Логика.Ждать
+        line: 19
+        SECONDS: 0.5
+  - type: Моторы.Мотор выключить
+    line: 20
+    PORT: '1'
+  - type: Свет.LED цвет
+    line: 21
+    COLOR_NAME: '2'

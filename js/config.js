@@ -1,0 +1,2 @@
+// @ts-nocheck
+const APP_CONFIG={DEMO_LIMIT:5,DEMO_COUNT_KEY:"wedo_demo_count",SESSION_KEY:"wedo_session",VERSION:"2.6.3",BLE_SCAN_TIMEOUT:1e4,EXAMPLES:[{name:"Богомол",file:"examples/богомол.yaml"},{name:"Лягушка",file:"examples/лягушка.yaml"},{name:"Тест мотор+свет",file:"examples/тест_мотор_свет.yaml"}],LOG_COLORS:{info:"#00ff88",warning:"#ffcc00",error:"#ff4444",success:"#44ff88"}};Object.freeze(APP_CONFIG);

@@ -1,0 +1,342 @@
+/*
+ * Project: WeDo Studio App (Editor)
+ * Version: 2.6.3
+ * Date: 2026-09-08
+ * Author: @smg38
+ * Description: Стили только для редактора (интерфейс с Blockly)
+ */
+
+/* === APP CONTAINER === */
+#app-container {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #f0f4f8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+}
+
+/* === BLOCKLY AREA === */
+#blocklyDiv {
+    flex: 1;
+    height: 100%;
+    min-width: 0;
+}
+
+/* === SIDEBAR === */
+#sidebar {
+    width: 340px;
+    min-width: 340px;
+    background: #ffffff;
+    padding: 15px 18px;
+    box-shadow: -2px 0 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    z-index: 10;
+    border-left: 1px solid #e8ecf0;
+}
+
+.app-title {
+    margin: 0 0 8px 0;
+    color: #4C97FF;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* === USER PANEL === */
+#user-panel {
+    background: #e8f4fd;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #4C97FF;
+}
+
+#user-panel #u-name {
+    font-weight: 600;
+    color: #2C3E50;
+}
+
+#user-panel .logout-btn {
+    cursor: pointer;
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    background: transparent;
+    border: none;
+}
+
+#user-panel .logout-btn:hover {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* === PROJECT NAME INPUT === */
+#project-name {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 13px;
+    transition: border-color 0.3s;
+    background: #fafbfc;
+}
+
+#project-name:focus {
+    outline: none;
+    border-color: #4C97FF;
+    background: white;
+}
+
+/* === HUB INFO PANEL === */
+#hub-info-panel {
+    background: #e8f4fd;
+    border-left: 4px solid #4C97FF;
+    padding: 12px 14px;
+    border-radius: 4px;
+    display: none;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+#hub-info-panel h4 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    border-bottom: 1px dashed #d0d7de;
+    padding-bottom: 3px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #555;
+}
+
+.info-value {
+    color: #000;
+    font-weight: 500;
+}
+
+/* === BUTTONS === */
+button.app-btn {
+    padding: 9px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    font-size: 13px;
+    width: 100%;
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+}
+
+button.app-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+button.app-btn:active {
+    transform: translateY(0);
+}
+
+.btn-run {
+    background: #4C97FF;
+}
+
+.btn-run:hover {
+    background: #3a7fd9;
+}
+
+.btn-stop {
+    background: #FF4C4C;
+}
+
+.btn-stop:hover {
+    background: #e04444;
+}
+
+.btn-connect {
+    background: #2ECC71;
+}
+
+.btn-connect:hover {
+    background: #27ae60;
+}
+
+.btn-save {
+    background: #F39C12;
+}
+
+.btn-save:hover {
+    background: #d68910;
+}
+
+.btn-load {
+    background: #9B59B6;
+}
+
+.btn-load:hover {
+    background: #8e44ad;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-group button {
+    flex: 1;
+}
+
+/* === EXAMPLES LIST === */
+#examples-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#examples-list li {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    color: #2C3E50;
+}
+
+#examples-list li:hover {
+    background: #f0f4f8;
+}
+
+#examples-list li:last-child {
+    border-bottom: none;
+}
+
+.examples-label {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    color: #7F8C8D;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* === LOG CONSOLE === */
+#log {
+    flex: 1;
+    min-height: 80px;
+    max-height: 200px;
+    background: #1a1a2e;
+    color: #00ff88;
+    padding: 10px 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    overflow-y: auto;
+    border-radius: 6px;
+    border: 1px solid #2d2d44;
+    line-height: 1.6;
+}
+
+#log::-webkit-scrollbar {
+    width: 6px;
+}
+
+#log::-webkit-scrollbar-track {
+    background: #1a1a2e;
+}
+
+#log::-webkit-scrollbar-thumb {
+    background: #4C97FF;
+    border-radius: 3px;
+}
+
+#log > div {
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    padding: 1px 0;
+}
+
+/* === STATUS BAR === */
+.status-bar {
+    font-size: 11px;
+    color: #95a5a6;
+    text-align: center;
+    margin-top: 5px;
+    padding-top: 8px;
+    border-top: 1px solid #ecf0f1;
+}
+
+/* === RESPONSIVE APP === */
+@media (max-width: 1024px) {
+    #sidebar {
+        width: 280px;
+        min-width: 280px;
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    #app-container {
+        flex-direction: column;
+    }
+    
+    #sidebar {
+        width: 100%;
+        min-width: unset;
+        height: 50vh;
+        border-left: none;
+        border-top: 1px solid #e8ecf0;
+        padding: 12px 14px;
+    }
+    
+    #blocklyDiv {
+        height: 50vh;
+    }
+    
+    #log {
+        min-height: 60px;
+        max-height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    #sidebar {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+    
+    .app-title {
+        font-size: 1rem;
+    }
+    
+    button.app-btn {
+        font-size: 12px;
+        padding: 7px 10px;
+    }
+    
+    #log {
+        font-size: 10px;
+        padding: 8px 10px;
+        min-height: 50px;
+        max-height: 100px;
+    }
+}

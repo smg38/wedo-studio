@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Фон -->
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="#EBF3FF" stroke="#4C97FF" stroke-width="2"/>
+  
+  <!-- Корпус мотора -->
+  <rect x="16" y="22" width="32" height="24" rx="4" fill="#4C97FF" stroke="#2C3E50" stroke-width="2"/>
+  
+  <!-- Вал мотора -->
+  <rect x="48" y="30" width="8" height="8" rx="1" fill="#2C3E50"/>
+  
+  <!-- Клеммы -->
+  <circle cx="22" cy="28" r="3" fill="#FFBF00" stroke="#2C3E50" stroke-width="1.5"/>
+  <circle cx="22" cy="40" r="3" fill="#FFBF00" stroke="#2C3E50" stroke-width="1.5"/>
+  
+  <!-- Символ вращения -->
+  <path d="M 30 34 A 5 5 0 1 1 30 33" 
+        fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="30,28 33,31 27,31" fill="#ffffff"/>
+</svg>

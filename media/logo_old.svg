@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4C97FF" />
+      <stop offset="100%" stop-color="#6B5BFF" />
+    </linearGradient>
+    <linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ECC71" />
+      <stop offset="100%" stop-color="#1ABC9C" />
+    </linearGradient>
+  </defs>
+
+  <!-- Фоновая плашка (опционально, для темной темы) -->
+  <rect width="400" height="120" rx="16" fill="white" />
+
+  <!-- 1. Иконка: Гексагон (символ шестерни/хаба) -->
+  <g transform="translate(60, 60)">
+    <!-- Внешний шестиугольник -->
+    <polygon points="0,-36 31,-18 31,18 0,36 -31,18 -31,-18" fill="url(#logoGrad)" stroke="#2C3E50" stroke-width="2" stroke-linejoin="round"/>
+    
+    <!-- Внутренний круг (символ соединения/ядра) -->
+    <circle cx="0" cy="0" r="14" fill="white" stroke="#2C3E50" stroke-width="2"/>
+    
+    <!-- Символы кода </> внутри -->
+    <path d="M-6,-4 L-10,0 L-6,4" stroke="#2C3E50" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6,-4 L10,0 L6,4" stroke="#2C3E50" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Декоративные точки по углам (символы датчиков/портов) -->
+    <circle cx="0" cy="-28" r="4" fill="url(#gearGrad)" stroke="#2C3E50" stroke-width="1.5"/>
+    <circle cx="24" cy="14" r="4" fill="url(#gearGrad)" stroke="#2C3E50" stroke-width="1.5"/>
+    <circle cx="-24" cy="14" r="4" fill="url(#gearGrad)" stroke="#2C3E50" stroke-width="1.5"/>
+  </g>
+
+  <!-- 2. Текст: WeDo Studio -->
+  <g transform="translate(120, 55)">
+    <!-- WeDo -->
+    <text x="0" y="0" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="800" fill="#2C3E50" letter-spacing="1">
+      WeDo
+    </text>
+    
+    <!-- Studio -->
+    <text x="0" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="24" font-weight="600" fill="#7F8C8D" letter-spacing="2">
+      Studio
+    </text>
+
+    <!-- Декоративная линия под текстом -->
+    <line x1="0" y1="40" x2="160" y2="40" stroke="url(#logoGrad)" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Слоган -->
+    <text x="0" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" fill="#95A5A6" letter-spacing="0.5">
+      Визуальное программирование для LEGO WeDo 2.0
+    </text>
+  </g>
+</svg>

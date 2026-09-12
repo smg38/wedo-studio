@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- @file index.html | v2.6.3 | 2026-09-08 | @smg38 -->
+<!-- @file index.html | v2.6.5 | 2026-09-11 | @smg38 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WeDo Studio - Создавай будущее</title>
@@ -180,7 +180,6 @@ html {
 </div>
 
 <!-- === AUTH MODAL === -->
-<!-- === AUTH MODAL === -->
 <div id="auth-overlay" class="auth-overlay">
     <div class="auth-card">
         <span class="close-auth" onclick="auth.hideModal()">&times;</span>
@@ -202,7 +201,7 @@ html {
             <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
             
             <button type="button" class="btn btn-outline" style="width: 100%; margin-top: 10px; border-color: #ccc; color: #666;" onclick="auth.demoLogin()">
-                🍬 Демо-вход (без регистрации)
+                🍭 Демо-вход (без регистрации)
             </button>
 
             <p style="margin-top: 1rem; font-size: 0.9rem;">
@@ -217,10 +216,6 @@ html {
 <div id="app-container">
     <div id="blocklyDiv"></div>
     <div id="sidebar">
-        <div id="user-panel">
-            <span id="u-name">Гость</span>
-            <button class="logout-btn" onclick="auth.logout()">🚪 Выход</button>
-        </div>
         <h2 class="app-title">WeDo Studio v2.6</h2>
         
         <input type="text" id="project-name" placeholder="Название проекта">
@@ -228,7 +223,7 @@ html {
         <button class="app-btn btn-connect" onclick="app.connect()">🔌 Подключить хаб</button>
         
         <div class="btn-group">
-            <button class="app-btn btn-run" onclick="app.run()">🏁 Запуск</button>
+            <button class="app-btn btn-run" onclick="app.run()">🏃 Запуск</button>
             <button class="app-btn btn-stop" onclick="app.stop()">⏹️ Стоп</button>
         </div>
         
@@ -247,13 +242,60 @@ html {
             <div class="info-row"><span class="info-label">Заряд:</span> <span class="info-value" id="h-bat">-</span></div>
         </div>
 
+        <!-- НОВОЕ: Панель статуса портов -->
+        <div id="port-status-panel">
+            <div class="port-status-grid">
+                <!-- Объединенная ячейка статуса хаба -->
+                <div class="port-status-cell hub-status" id="hub-status-cell">
+                    <img src="media/port-hub-disconnected.svg" alt="Хаб" id="hub-status-img">
+                    <div class="hub-status-info">
+                        <span class="status-dot disconnected" id="hub-status-dot"></span>
+                        <span class="port-status-label" id="hub-status-label">Хаб не подключен</span>
+                    </div>
+                </div>
+                <!-- Ячейка порта 1 -->
+                <div class="port-status-cell disconnected" id="port1-cell">
+                    <img src="media/port-empty.svg" alt="Порт 1" id="port1-img">
+                    <span class="port-status-label">Порт 1</span>
+                </div>
+                <!-- Ячейка порта 2 -->
+                <div class="port-status-cell disconnected" id="port2-cell">
+                    <img src="media/port-empty.svg" alt="Порт 2" id="port2-img">
+                    <span class="port-status-label">Порт 2</span>
+                </div>
+            </div>
+        </div>
+
         <div style="margin-top: 10px;">
             <p class="examples-label">📚 Примеры программ:</p>
             <ul id="examples-list"></ul>
         </div>
 
         <div id="log">Готов к работе...</div>
-        <div class="status-bar">Author: @smg38 | Apache 2.0 | v2.6.3</div>
+        <div class="status-bar">Author: '@smg38' | Apache 2.0 | v2.6.5</div>
+    </div>
+</div>
+
+<!-- НОВОЕ: Меню пользователя в левом нижнем углу -->
+<div id="user-menu-container">
+    <div id="user-menu-trigger" onclick="toggleUserMenu()">
+        <span class="user-icon">👤</span>
+        <span class="user-name" id="u-name">Гость</span>
+    </div>
+    <div id="user-menu-dropdown">
+        <button class="user-menu-item" onclick="openUserSettings()">
+            <span class="menu-icon">⚙️</span> Настройки
+        </button>
+        <button class="user-menu-item" onclick="changeUserName()">
+            <span class="menu-icon">✏️</span> Сменить имя
+        </button>
+        <button class="user-menu-item" onclick="openSupport()">
+            <span class="menu-icon">💬</span> Написать в поддержку
+        </button>
+        <div class="user-menu-divider"></div>
+        <button class="user-menu-item danger" onclick="auth.logout()">
+            <span class="menu-icon">🚪</span> Выход
+        </button>
     </div>
 </div>
 
@@ -270,12 +312,11 @@ document.addEventListener('keydown', e => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
-        // Пропускаем пустые ссылки и ссылки только с "#"
         if (!href || href === '#' || href === '#') {
             return;
         }
         e.preventDefault();
-        const targetId = href.substring(1); // Убираем #
+        const targetId = href.substring(1);
         const target = document.getElementById(targetId);
         if (target) {
             const headerOffset = 80;
@@ -289,7 +330,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Проверка регистрации при загрузке
 console.log('🔍 Проверка openRegistration:', typeof openRegistration);
 console.log('🔍 Проверка Tally:', typeof Tally);
 </script>

@@ -1,0 +1,22 @@
+/*
+ * Project: WeDo Studio Icons Theme
+ * Version: 1.0.0
+ * Date: 2026-09-10
+ * Author: '@smg38'
+ * Description: Общая цветовая тема для иконок портов и хаба
+ *
+ * ПАЛИТРА:
+ *   --icon-bg:           #ffffff  (фон иконки)
+ *   --icon-stroke:       #2C3E50  (основной контур)
+ *   --icon-accent:       #4C97FF  (акцент, синий — мотор)
+ *   --icon-accent-green: #2ECC71  (зелёный — tilt/успех)
+ *   --icon-accent-pink:  #FF6584  (розовый — motion)
+ *   --icon-accent-orange:#F39C12  (оранжевый — неизвестное)
+ *   --icon-muted:        #BDC3C7  (серый — пусто)
+ *   --icon-danger:       #E74C3C  (красный — отключено)
+ *
+ * РАЗМЕРЫ:
+ *   Иконки в панели: 40x40 px
+ *   Иконка хаба:     50x50 px
+ *   ViewBox:         0 0 64 64 (единый для всех)
+ */

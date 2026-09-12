@@ -1,8 +1,8 @@
 meta:
   format: wedo-studio-v2
-  version: 2.5.0
-  author: @smg38
-  created: '2026-09-06T11:24:32.637Z'
+  version: 2.6.5
+  author: smg
+  created: '2026-09-11T09:24:20.936Z'
   description: Тест мотор+свет
 blocks:
   - type: Управление.Когда щелкнут по флагу
@@ -34,45 +34,56 @@ blocks:
         line: 9
         PORT: '1'
         SPEED: '{мотор}'
-      - type: Переменные.Увеличить
+      - type: Моторы.Мотор включить
         line: 10
+        PORT: '2'
+        SPEED: '{мотор}'
+      - type: Переменные.Увеличить
+        line: 11
         VAR: цвет
         DELTA: 1
       - type: Переменные.Увеличить
-        line: 11
+        line: 12
         VAR: мотор
         DELTA: 10
       - type: Логика.Ждать
-        line: 12
+        line: 13
         SECONDS: 0.5
   - type: Логика.Ждать
-    line: 13
+    line: 14
     SECONDS: 0.5
   - type: Циклы.Повторить
-    line: 14
+    line: 15
     TIMES: 10
     DO:
       - type: Свет.LED цвет (число)
-        line: 15
+        line: 16
         COLOR: '{цвет}'
       - type: Моторы.Мотор включить
-        line: 16
+        line: 17
         PORT: '1'
         SPEED: '{мотор}'
+      - type: Моторы.Мотор включить
+        line: 18
+        PORT: '2'
+        SPEED: '{мотор}'
       - type: Переменные.Увеличить
-        line: 17
+        line: 19
         VAR: цвет
         DELTA: -1
       - type: Переменные.Увеличить
-        line: 18
+        line: 20
         VAR: мотор
         DELTA: -20
       - type: Логика.Ждать
-        line: 19
+        line: 21
         SECONDS: 0.5
   - type: Моторы.Мотор выключить
-    line: 20
+    line: 22
     PORT: '1'
+  - type: Моторы.Мотор выключить
+    line: 23
+    PORT: '2'
   - type: Свет.LED цвет
-    line: 21
+    line: 24
     COLOR_NAME: '2'

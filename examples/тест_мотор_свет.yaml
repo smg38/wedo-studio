@@ -12,7 +12,7 @@ blocks:
   - type: Свет.LED цвет
     line: 3
     COLOR_NAME: '1'
-  - type: Логика.Ждать
+  - type: Циклы.Ждать
     line: 4
     SECONDS: 0.2
   - type: Переменные.Присвоить
@@ -46,10 +46,10 @@ blocks:
         line: 12
         VAR: мотор
         DELTA: 10
-      - type: Логика.Ждать
+      - type: Циклы.Ждать
         line: 13
         SECONDS: 0.5
-  - type: Логика.Ждать
+  - type: Циклы.Ждать
     line: 14
     SECONDS: 0.5
   - type: Циклы.Повторить
@@ -75,7 +75,7 @@ blocks:
         line: 20
         VAR: мотор
         DELTA: -20
-      - type: Логика.Ждать
+      - type: Циклы.Ждать
         line: 21
         SECONDS: 0.5
   - type: Моторы.Мотор выключить

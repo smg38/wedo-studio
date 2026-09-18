@@ -1,0 +1,77 @@
+meta:
+  format: wedo-studio-v2
+  version: 2.7.0
+  author: smg
+  created: '2026-09-17T14:23:23.030Z'
+  description: Датчики
+blocks:
+  - type: Управление.Когда щелкнут по флагу
+    line: 1
+    blockId: k1*cy[L^Cy+nezId+iPf
+  - type: Условия.Если
+    line: 2
+    blockId: 7-UhX2gPKm:,0g_IXB#%
+    IF0:
+      type: Условия.Сравнение
+      line: 3
+      blockId: u2nr4PY`xLY0wrhp%FqR
+      OP: GT
+      A:
+        type: Датчики.Расстояние
+        line: 4
+        blockId: v;BPQfsU=:0^s$S$z2:.
+      B: 20
+    DO0:
+      - type: Свет.LED цвет
+        line: 5
+        blockId: $8OtLU;L:}pXYQS2sfZ)
+        COLOR_NAME: '9'
+    ELSE:
+      - type: Циклы.Пока/До
+        line: 6
+        blockId: pO6_#qOw9P0bbARg]NS2
+        MODE: WHILE
+        BOOL:
+          type: Условия.Сравнение
+          line: 7
+          blockId: tKq(%G2_@DF:1Xr[8.Yy
+          OP: LT
+          A:
+            type: Датчики.Расстояние
+            line: 8
+            blockId: 3%1r0hLI$5$.pS5RzZ%O
+          B: 20
+        DO:
+          - type: Условия.Если
+            line: 9
+            blockId: B1gRB/dRB*v%Z!Fn2dGN
+            IF0:
+              type: Условия.Сравнение
+              line: 10
+              blockId: E3~px!5-L`53VX_dYB9=
+              OP: GT
+              A:
+                type: Датчики.НаклонВлевоВправо
+                line: 11
+                blockId: rFd`4L0n^g%,c|Jk#aQK
+              B: 0
+            IF1:
+              type: Условия.Сравнение
+              line: 12
+              blockId: 3iv0YeYf*=Q8SrX~HDg7
+              OP: LT
+              A:
+                type: Датчики.НаклонВлевоВправо
+                line: 13
+                blockId: '*P#S$0^C+{.=HG:HW~c)'
+              B: 0
+            DO0:
+              - type: Свет.LED цвет
+                line: 14
+                blockId: vXR!t94?})`4}sF5jxjA
+                COLOR_NAME: '2'
+            DO1:
+              - type: Свет.LED цвет
+                line: 15
+                blockId: P6.1KTMFpD9KgfGfYq.i
+                COLOR_NAME: '1'

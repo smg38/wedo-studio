@@ -18,7 +18,7 @@ blocks:
         line: 4
         PORT: '1'
         SPEED: 50
-      - type: Логика.Ждать
+      - type: Циклы.Ждать
         line: 5
         SECONDS: 1
       - type: Свет.LED цвет
@@ -28,7 +28,7 @@ blocks:
         line: 7
         PORT: '1'
         SPEED: -50
-      - type: Логика.Ждать
+      - type: Циклы.Ждать
         line: 8
         SECONDS: 1
       - type: Свет.LED цвет

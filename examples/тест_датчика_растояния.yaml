@@ -1,0 +1,96 @@
+meta:
+  format: wedo-studio-v2
+  version: 2.7.1
+  author: smg
+  created: '2026-09-18T16:49:48.062Z'
+  description: Тест датчика растояния
+blocks:
+  - type: Управление.Когда щелкнут по флагу
+    line: 1
+  - type: Циклы.Повторить
+    line: 2
+    comment: |-
+      Тест датчика наклона
+      Крутите датчик в разные стороны
+    TIMES: 2000
+    DO:
+      - type: Условия.Если
+        line: 3
+        IF0:
+          type: Условия.Сравнение
+          line: 4
+          OP: GTE
+          A:
+            type: Датчики.Расстояние
+            line: 5
+          B: 10
+        IF1:
+          type: Условия.Сравнение
+          line: 6
+          OP: GTE
+          A:
+            type: Датчики.Расстояние
+            line: 7
+          B: 8
+        IF2:
+          type: Условия.Сравнение
+          line: 8
+          OP: GTE
+          A:
+            type: Датчики.Расстояние
+            line: 9
+          B: 5
+        IF3:
+          type: Условия.Сравнение
+          line: 10
+          OP: GTE
+          A:
+            type: Датчики.Расстояние
+            line: 11
+          B: 3
+        IF4:
+          type: Условия.Сравнение
+          line: 12
+          OP: GTE
+          A:
+            type: Датчики.Расстояние
+            line: 13
+          B: 0
+        IF5:
+          type: Условия.Сравнение
+          line: 14
+          OP: LTE
+          A:
+            type: Датчики.Расстояние
+            line: 15
+          B: 0
+        DO0:
+          - type: Свет.LED цвет
+            line: 16
+            COLOR_NAME: '3'
+        DO1:
+          - type: Свет.LED цвет
+            line: 17
+            COLOR_NAME: '2'
+        DO2:
+          - type: Свет.LED цвет
+            line: 18
+            COLOR_NAME: '1'
+        DO3:
+          - type: Свет.LED цвет
+            line: 19
+            COLOR_NAME: '5'
+        DO4:
+          - type: Свет.LED цвет
+            line: 20
+            COLOR_NAME: '6'
+        DO5:
+          - type: Свет.LED цвет
+            line: 21
+            COLOR_NAME: '9'
+      - type: Циклы.Ждать
+        line: 22
+        SECONDS: 0.1
+  - type: Свет.LED цвет
+    line: 23
+    COLOR_NAME: '3'

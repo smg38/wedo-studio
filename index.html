@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- @file index.html | v2.6.5 | 2026-09-11 | @smg38 -->
+<!-- @file index.html | v2.7.1 | 2026-09-17 | @smg38 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WeDo Studio - Создавай будущее</title>
+<title>WeDo Studio v2.7.1</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <!-- Tally Widget Script -->
@@ -22,7 +22,7 @@
 <script src="lib/js-yaml.min.js"></script>
 <script>window.yaml = window.jsyaml;</script>
 
-<!-- Config & Auth -->
+<!-- Config & Users -->
 <script src="js/config.js"></script>
 <script src="js/users-data.js"></script>
 
@@ -34,11 +34,10 @@
 
 <!-- Main App Logic -->
 <script src="js/wedo-app.js"></script>
+<script src="js/auth.js"></script>
 
 <style>
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 </style>
 </head>
 <body>
@@ -81,8 +80,8 @@ html {
                 <p>Забудьте о сложном синтаксисе. Наша блочная система позволяет собирать алгоритмы любой сложности, просто перетаскивая элементы.</p>
             </div>
             <div class="card">
-                <h3>☁️ Облачное сохранение</h3>
-                <p>Ваши проекты всегда под рукой. Сохраняйте их в удобном YAML-формате, делитесь с друзьями и коллегами.</p>
+                <h3>📡 Датчики движения и наклона</h3>
+                <p>Читайте расстояния до объекта и углы наклона в реальном времени. Два режима датчика наклона: направление и точные углы.</p>
             </div>
             <div class="card">
                 <h3>🚀 Мгновенный запуск</h3>
@@ -152,7 +151,7 @@ html {
         <h2 class="section-title">Как это работает</h2>
         <div class="screenshot-grid">
             <a href="media/screen1.png" target="_blank" class="screenshot-card">
-                <img src="media/screen1.png" alt="Интерфейс WeDo Studio v2.0">
+                <img src="media/screen1.png" alt="Интерфейс WeDo Studio v2.7.1">
                 <div class="screenshot-caption">📱 Главный экран</div>
             </a>
             <a href="media/screen2.png" target="_blank" class="screenshot-card">
@@ -198,14 +197,14 @@ html {
                     </button>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
-            
-            <button type="button" class="btn btn-outline" style="width: 100%; margin-top: 10px; border-color: #ccc; color: #666;" onclick="auth.demoLogin()">
+            <button type="submit" class="btn btn-primary" style="width:100%;">Войти</button>
+
+            <button type="button" class="btn btn-outline" style="width:100%; margin-top:10px; border-color:#ccc; color:#666;" onclick="auth.demoLogin()">
                 🍭 Демо-вход (без регистрации)
             </button>
 
-            <p style="margin-top: 1rem; font-size: 0.9rem;">
-                Нет аккаунта? <a href="#" onclick="openRegistration(); return false;" style="color: var(--primary-color);" id="register-btn-modal">Зарегистрируйтесь</a>
+            <p style="margin-top:1rem; font-size:0.9rem;">
+                Нет аккаунта? <a href="#" onclick="openRegistration(); return false;" style="color:var(--primary-color);" id="register-btn-modal">Зарегистрируйтесь</a>
             </p>
             <div id="auth-error"></div>
         </form>
@@ -216,17 +215,17 @@ html {
 <div id="app-container">
     <div id="blocklyDiv"></div>
     <div id="sidebar">
-        <h2 class="app-title">WeDo Studio v2.6</h2>
-        
+        <h2 class="app-title">WeDo Studio v2.7.1</h2>
+
         <input type="text" id="project-name" placeholder="Название проекта">
-        
-        <button class="app-btn btn-connect" onclick="app.connect()">🔌 Подключить хаб</button>
-        
+
+            <button id="btn-hub" class="app-btn btn-connect" onclick="app.connect()">🔌 Подключить хаб</button>
+
         <div class="btn-group">
             <button class="app-btn btn-run" onclick="app.run()">🏃 Запуск</button>
             <button class="app-btn btn-stop" onclick="app.stop()">⏹️ Стоп</button>
         </div>
-        
+
         <div class="btn-group">
             <button class="app-btn btn-save" onclick="app.save()">💾 Сохранить</button>
             <button class="app-btn btn-load" onclick="document.getElementById('fileInput').click()">📂 Загрузить</button>
@@ -242,41 +241,43 @@ html {
             <div class="info-row"><span class="info-label">Заряд:</span> <span class="info-value" id="h-bat">-</span></div>
         </div>
 
-        <!-- НОВОЕ: Панель статуса портов -->
+        <!-- Панель статуса портов -->
         <div id="port-status-panel">
             <div class="port-status-grid">
-                <!-- Объединенная ячейка статуса хаба -->
+                <!-- Ячейка статуса хаба -->
                 <div class="port-status-cell hub-status" id="hub-status-cell">
                     <img src="media/port-hub-disconnected.svg" alt="Хаб" id="hub-status-img">
                     <div class="hub-status-info">
                         <span class="status-dot disconnected" id="hub-status-dot"></span>
-                        <span class="port-status-label" id="hub-status-label">Хаб не подключен</span>
+                        <span class="port-status-label" id="hub-status-label">Хаб не подключён</span>
                     </div>
                 </div>
                 <!-- Ячейка порта 1 -->
                 <div class="port-status-cell disconnected" id="port1-cell">
                     <img src="media/port-empty.svg" alt="Порт 1" id="port1-img">
                     <span class="port-status-label">Порт 1</span>
+                    <span class="port-status-value" id="port1-value"></span>
                 </div>
                 <!-- Ячейка порта 2 -->
                 <div class="port-status-cell disconnected" id="port2-cell">
                     <img src="media/port-empty.svg" alt="Порт 2" id="port2-img">
                     <span class="port-status-label">Порт 2</span>
+                    <span class="port-status-value" id="port2-value"></span>
                 </div>
             </div>
         </div>
 
-        <div style="margin-top: 10px;">
+        <div style="margin-top:10px;">
             <p class="examples-label">📚 Примеры программ:</p>
             <ul id="examples-list"></ul>
         </div>
 
         <div id="log">Готов к работе...</div>
-        <div class="status-bar">Author: '@smg38' | Apache 2.0 | v2.6.5</div>
+        <div class="status-bar">Author: '@smg38' | Apache 2.0 | v2.7.1</div>
     </div>
 </div>
 
-<!-- НОВОЕ: Меню пользователя в левом нижнем углу -->
+<!-- Меню пользователя -->
 <div id="user-menu-container">
     <div id="user-menu-trigger" onclick="toggleUserMenu()">
         <span class="user-icon">👤</span>
@@ -300,7 +301,7 @@ html {
 </div>
 
 <script>
-// Защита интерфейса (для "вида")
+// Защита интерфейса (косметика)
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u')) {
@@ -308,13 +309,11 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// === ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРНЫХ ССЫЛОК ===
+// Плавная прокрутка для якорных ссылок
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
-        if (!href || href === '#' || href === '#') {
-            return;
-        }
+        if (!href || href === '#') return;
         e.preventDefault();
         const targetId = href.substring(1);
         const target = document.getElementById(targetId);
@@ -322,16 +321,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const headerOffset = 80;
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
     });
 });
-
-console.log('🔍 Проверка openRegistration:', typeof openRegistration);
-console.log('🔍 Проверка Tally:', typeof Tally);
 </script>
 </body>
 </html>

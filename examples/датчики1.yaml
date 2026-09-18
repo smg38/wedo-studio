@@ -1,0 +1,69 @@
+meta:
+  format: wedo-studio-v2
+  version: 2.7.1
+  author: smg
+  created: '2026-09-17T21:07:43.854Z'
+  description: Датчики
+blocks:
+  - type: Управление.Когда щелкнут по флагу
+    line: 1
+    comment: Проверка датчиков
+  - type: Условия.Если
+    line: 2
+    IF0:
+      type: Условия.Сравнение
+      line: 3
+      OP: GT
+      A:
+        type: Датчики.Расстояние
+        line: 4
+      B: 9
+    DO0:
+      - type: Свет.LED цвет
+        line: 5
+        COLOR_NAME: '9'
+    ELSE:
+      - type: Циклы.Пока/До
+        line: 6
+        MODE: WHILE
+        BOOL:
+          type: Условия.Сравнение
+          line: 7
+          OP: LTE
+          A:
+            type: Датчики.Расстояние
+            line: 8
+          B: 9
+        DO:
+          - type: Условия.Если
+            line: 9
+            IF0:
+              type: Условия.Сравнение
+              line: 10
+              OP: GT
+              A:
+                type: Датчики.НаклонВлевоВправо
+                line: 11
+              B: 0
+            IF1:
+              type: Условия.Сравнение
+              line: 12
+              OP: LT
+              A:
+                type: Датчики.НаклонВлевоВправо
+                line: 13
+              B: 0
+            DO0:
+              - type: Свет.LED цвет
+                line: 14
+                COLOR_NAME: '2'
+              - type: Циклы.Ждать
+                line: 15
+                SECONDS: 1
+            DO1:
+              - type: Свет.LED цвет
+                line: 16
+                COLOR_NAME: '1'
+              - type: Циклы.Ждать
+                line: 17
+                SECONDS: 1

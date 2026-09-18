@@ -30,7 +30,7 @@ blocks:
           - type: Свет.LED цвет (число)
             line: 7
             COLOR: '{цвет}'
-          - type: Логика.Ждать
+          - type: Циклы.Ждать
             line: 8
             SECONDS: 0.1
           - type: Условия.Если

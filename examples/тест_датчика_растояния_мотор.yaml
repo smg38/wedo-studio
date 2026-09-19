@@ -21,7 +21,7 @@ blocks:
           line: 4
           OP: GTE
           A:
-            type: Датчики.Расстояние
+            type: Датчики.РасстояниеСм
             line: 5
           B: 10
         IF1:
@@ -29,7 +29,7 @@ blocks:
           line: 6
           OP: GTE
           A:
-            type: Датчики.Расстояние
+            type: Датчики.РасстояниеСм
             line: 7
           B: 8
         IF2:
@@ -37,7 +37,7 @@ blocks:
           line: 8
           OP: GTE
           A:
-            type: Датчики.Расстояние
+            type: Датчики.РасстояниеСм
             line: 9
           B: 5
         IF3:
@@ -45,7 +45,7 @@ blocks:
           line: 10
           OP: GTE
           A:
-            type: Датчики.Расстояние
+            type: Датчики.РасстояниеСм
             line: 11
           B: 3
         IF4:
@@ -53,7 +53,7 @@ blocks:
           line: 12
           OP: GTE
           A:
-            type: Датчики.Расстояние
+            type: Датчики.РасстояниеСм
             line: 13
           B: 0
         IF5:
@@ -61,7 +61,7 @@ blocks:
           line: 14
           OP: LTE
           A:
-            type: Датчики.Расстояние
+            type: Датчики.РасстояниеСм
             line: 15
           B: 0
         DO0:

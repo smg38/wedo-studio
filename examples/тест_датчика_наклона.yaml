@@ -2,7 +2,7 @@ meta:
   format: wedo-studio-v2
   version: 2.7.1
   author: smg
-  created: '2026-09-18T15:56:49.150Z'
+  created: '2026-09-19T13:31:30.845Z'
   description: Тест датчика наклона
 blocks:
   - type: Управление.Когда щелкнут по флагу
@@ -17,77 +17,52 @@ blocks:
       - type: Условия.Если
         line: 3
         IF0:
-          type: Условия.Сравнение
+          type: Датчики.НаклонРавен
           line: 4
-          OP: EQ
-          A:
-            type: Датчики.НаправлениеНаклона
-            line: 5
-          B: 0
+          TILT: '0'
         IF1:
-          type: Условия.Сравнение
-          line: 6
-          OP: EQ
-          A:
-            type: Датчики.НаправлениеНаклона
-            line: 7
-          B: 3
+          type: Датчики.НаклонРавен
+          line: 5
+          TILT: '3'
         IF2:
-          type: Условия.Сравнение
-          line: 8
-          OP: EQ
-          A:
-            type: Датчики.НаправлениеНаклона
-            line: 9
-          B: 5
+          type: Датчики.НаклонРавен
+          line: 6
+          TILT: '9'
         IF3:
-          type: Условия.Сравнение
-          line: 10
-          OP: EQ
-          A:
-            type: Датчики.НаправлениеНаклона
-            line: 11
-          B: 7
+          type: Датчики.НаклонРавен
+          line: 7
+          TILT: '7'
         IF4:
-          type: Условия.Сравнение
-          line: 12
-          OP: EQ
-          A:
-            type: Датчики.НаправлениеНаклона
-            line: 13
-          B: 9
-        IF5:
-          type: Условия.Сравнение
-          line: 14
-          OP: EQ
-          A:
-            type: Датчики.НаправлениеНаклона
-            line: 15
-          B: 10
+          type: Датчики.НаклонРавен
+          line: 8
+          TILT: '5'
         DO0:
           - type: Свет.LED цвет
-            line: 16
+            line: 9
             COLOR_NAME: '3'
         DO1:
           - type: Свет.LED цвет
-            line: 17
+            line: 10
             COLOR_NAME: '2'
         DO2:
           - type: Свет.LED цвет
-            line: 18
+            line: 11
             COLOR_NAME: '1'
         DO3:
           - type: Свет.LED цвет
-            line: 19
+            line: 12
             COLOR_NAME: '5'
         DO4:
           - type: Свет.LED цвет
-            line: 20
+            line: 13
             COLOR_NAME: '6'
-        DO5:
+        ELSE:
           - type: Свет.LED цвет
-            line: 21
+            line: 14
             COLOR_NAME: '9'
       - type: Циклы.Ждать
-        line: 22
+        line: 15
         SECONDS: 0.1
+  - type: Свет.LED цвет
+    line: 16
+    COLOR_NAME: '3'

@@ -1,0 +1,879 @@
+# -----------------------------------------------------------------------------
+# --- FILE: blocks_catalog.yaml
+# --- Version: 1.8.0
+# --- Date: 2026-09-19
+# --- Author: @smg38
+# --- Description: Полный каталог визуальных блоков WeDo Studio.
+# ---              Служит единым источником для генерации toolbox,
+# ---              документации и различных наборов блоков.
+# ---
+# --- ОСОБЕННОСТИ:
+# ---   - Блоки вложены в свои категории.
+# ---   - Поле 'name' — чистое имя блока без префикса категории.
+# ---     Полное имя для YAML-сериализации собирается как
+# ---     "Категория.ИмяБлока" (например: "Управление.Подключить хаб").
+# ---   - Поле 'tags' — метка набора, к которому относится блок.
+# ---     Значение из списка meta.tags. Служит для фильтрации блоков
+# ---     при генерации toolbox (например, только 'full' для основного набора).
+# ---
+# --- ТЕГИ:
+# ---   full     — реализованные и работающие блоки (основной набор)
+# ---   basic    — упрощённый набор для начинающих
+# ---   advanced — продвинутый набор
+# ---   debug    — только для отладки (админам)
+# ---   future   — запланированные блоки, ещё не реализованы
+# -----------------------------------------------------------------------------
+
+meta:
+  format: 'wedo-studio-blocks'
+  name: 'full-blocks'
+  version: 1.8.0
+  author: '@smg38'
+  created: '2026-09-19T16:00:00Z'
+  description: 'Каталог всех блоков WeDo Studio'
+  tags:
+    - 'full'      # Полный набор (все реализованные блоки)
+    - 'basic'     # Базовый набор для начинающих
+    - 'advanced'  # Продвинутый набор
+    - 'debug'     # Только для отладки (админам)
+    - 'future'    # Запланированные блоки (ещё не реализованы)
+
+# =============================================================================
+# --- ОПИСАНИЕ КАТЕГОРИЙ И БЛОКОВ ---
+# =============================================================================
+categories:
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: УПРАВЛЕНИЕ (control)
+  # ===========================================================================
+  - id: 'control'
+    name: 'Управление'
+    colour: '#4C97FF'
+    icon: '🎮'
+    blocks:
+      - id: 'event_whenflagclicked'
+        name: 'Когда щелкнут по флагу'
+        tags: 'full'
+        type: 'event'
+        tooltip: 'Точка входа в программу. Выполнение начинается отсюда.'
+        deletable: false
+        fields: []
+
+      - id: 'wedo_connect'
+        name: 'Подключить хаб'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Подключение к хабу WeDo 2.0 через Bluetooth.'
+        fields: []
+
+      - id: 'wedo_output'
+        name: 'Вывести'
+        tags: 'full'
+        type: 'statement'
+        tooltip: |
+          Вывести значение в панель вывода.
+          Можно вставить любой блок-значение:
+          число, текст, переменную, показание датчика и т.д.
+        fields: []
+        inputs:
+          - name: 'VALUE'
+            check: null   # принимает любое значение (Number, String, Boolean)
+            shadow:
+              type: 'text'
+              fields: { TEXT: 'Привет!' }
+# ===========================================================================
+# КАТЕГОРИЯ: УПРАВЛЕНИЕ (control) — не реализовано
+# ===========================================================================
+      - id: 'wedo_parallel'
+        name: 'Запустить параллельно'
+        tags: 'future'   # TODO #43, v3.1.0
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v3.1.0, см. TODO #43).
+          Запустить блоки внутри в параллельном потоке.
+          Основной поток продолжит выполнение не дожидаясь.
+        fields: []
+        statements:
+          - name: 'DO'
+
+      - id: 'wedo_parallel_stop'
+        name: 'Остановить задачу'
+        tags: 'future'   # TODO #43, v3.1.0
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v3.1.0, см. TODO #43).
+          Остановить выполнение параллельной задачи по имени.
+        fields:
+          - name: 'TASK_NAME'
+            type: 'dropdown'
+            dynamic: 'tasks'
+        inputs: []
+
+# ===========================================================================
+# КАТЕГОРИЯ: СОБЫТИЯ (events)
+# ===========================================================================
+  - id: 'events'
+    name: 'События'
+    colour: '#FFBF00'
+    icon: '⚡'
+    blocks:
+      - id: 'wedo_event_keypressed'
+        name: 'По клавише'
+        tags: 'future'   # TODO #30, v2.8.0
+        type: 'event'
+        tooltip: |
+          ⏳ Запланировано (v2.8.0, см. TODO #30).
+          Выполнить программу, когда нажата указанная клавиша.
+        fields:
+          - name: 'KEY'
+            type: 'dropdown'
+            options:
+              - { label: 'Пробел', value: 'Space' }
+              - { label: 'Стрелка влево', value: 'ArrowLeft' }
+              - { label: 'Стрелка вправо', value: 'ArrowRight' }
+              - { label: 'Стрелка вверх', value: 'ArrowUp' }
+              - { label: 'Стрелка вниз', value: 'ArrowDown' }
+              - { label: 'Enter', value: 'Enter' }
+        inputs: []
+
+      - id: 'wedo_event_if'
+        name: 'Если'
+        tags: 'future'   # TODO #30, v2.8.0
+        type: 'event'
+        tooltip: |
+          ⏳ Запланировано (v2.8.0, см. TODO #30).
+          Запустить программу, когда условие станет истинным.
+        fields: []
+        inputs:
+          - name: 'CONDITION'
+            check: 'Boolean'
+
+      - id: 'wedo_event_timer'
+        name: 'Через X сек'
+        tags: 'future'   # TODO #30, v2.8.0
+        type: 'event'
+        tooltip: |
+          ⏳ Запланировано (v2.8.0, см. TODO #30).
+          Запустить программу через указанное количество секунд.
+        fields: []
+        inputs:
+          - name: 'SECONDS'
+            check: 'Number'
+            label: 'сек'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 5 }
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: МОТОРЫ (motors)
+  # ===========================================================================
+  - id: 'motors'
+    name: 'Моторы'
+    colour: '#FFBF00'
+    icon: '⚙️'
+    blocks:
+      - id: 'wedo_motor_on'
+        name: 'Мотор включить'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Включить мотор на выбранном порту. Скорость от -100% (назад) до 100% (вперед).'
+        fields:
+          - name: 'PORT'
+            type: 'dropdown'
+            options:
+              - { label: 'Порт 1', value: '1' }
+              - { label: 'Порт 2', value: '2' }
+        inputs:
+          - name: 'SPEED'
+            check: 'Number'
+            label: '%'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 50 }
+
+      - id: 'wedo_motor_off'
+        name: 'Мотор выключить'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Остановить мотор на выбранном порту.'
+        fields:
+          - name: 'PORT'
+            type: 'dropdown'
+            options:
+              - { label: 'Порт 1', value: '1' }
+              - { label: 'Порт 2', value: '2' }
+        inputs: []
+# ===========================================================================
+# КАТЕГОРИЯ: МОТОРЫ (motors) — не реализовано
+# ===========================================================================
+      - id: 'wedo_motor_ramp'
+        name: 'Плавно до A за B сек'
+        tags: 'future'   # TODO #27, v2.7.0
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v2.7.0, см. TODO #27).
+          Плавно изменить скорость мотора до указанного значения
+          за заданное время. Метод motorRamp() уже заложен в драйвер.
+        fields:
+          - name: 'PORT'
+            type: 'dropdown'
+            options:
+              - { label: 'Порт 1', value: '1' }
+              - { label: 'Порт 2', value: '2' }
+        inputs:
+          - name: 'TARGET'
+            check: 'Number'
+            label: '%'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 100 }
+          - name: 'DURATION'
+            check: 'Number'
+            label: 'сек'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 2 }
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: СВЕТ (light)
+  # ===========================================================================
+  - id: 'light'
+    name: 'Свет'
+    colour: '#FF6680'
+    icon: '💡'
+    blocks:
+      - id: 'wedo_led_named'
+        name: 'LED цвет'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Установить один из предопределенных цветов LED-подсветки хаба.'
+        fields:
+          - name: 'COLOR_NAME'
+            type: 'dropdown'
+            options:
+              - { label: 'Выкл', value: '0' }
+              - { label: 'Розовый', value: '1' }
+              - { label: 'Фиолетовый', value: '2' }
+              - { label: 'Синий', value: '3' }
+              - { label: 'Голубой', value: '4' }
+              - { label: 'Циан', value: '5' }
+              - { label: 'Зелёный', value: '6' }
+              - { label: 'Жёлтый', value: '7' }
+              - { label: 'Оранжевый', value: '8' }
+              - { label: 'Красный', value: '9' }
+              - { label: 'Белый', value: '10' }
+        inputs: []
+
+      - id: 'wedo_led_variable'
+        name: 'LED цвет (число)'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Установить цвет LED-подсветки по его числовому индексу (0-10). Можно использовать переменную.'
+        fields: []
+        inputs:
+          - name: 'COLOR'
+            check: 'Number'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 0 }
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: ЗВУК (sound)
+  # ===========================================================================
+  - id: 'sound'
+    name: 'Звук'
+    colour: '#FF6680'
+    icon: '🔊'
+    blocks:
+      - id: 'wedo_sound_target'
+        name: 'Установить устройство'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          Выбрать, где воспроизводится звук:
+          — Компьютер (Web Audio API),
+          — Хаб (пьезо-пищалка).
+          По умолчанию звук идёт через компьютер.
+        fields:
+          - name: 'TARGET'
+            type: 'dropdown'
+            options:
+              - { label: 'Компьютер', value: 'computer' }
+              - { label: 'Хаб', value: 'hub' }
+        inputs: []
+
+      - id: 'wedo_sound_note'
+        name: 'Играть ноту'
+        tags: 'future'
+        type: 'statement'
+        tooltip: 'Проиграть музыкальную ноту указанной длительности.'
+        fields:
+          - name: 'NOTE'
+            type: 'dropdown'
+            options:
+              - { label: 'До (C4)', value: '262' }
+              - { label: 'Ре (D4)', value: '294' }
+              - { label: 'Ми (E4)', value: '330' }
+              - { label: 'Фа (F4)', value: '349' }
+              - { label: 'Соль (G4)', value: '392' }
+              - { label: 'Ля (A4)', value: '440' }
+              - { label: 'Си (B4)', value: '494' }
+              - { label: 'До (C5)', value: '523' }
+        inputs:
+          - name: 'DUR'
+            check: 'Number'
+            label: 'мс'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 500 }
+
+      - id: 'wedo_sound_melody'
+        name: 'Играть мелодию'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          Проиграть мелодию по имени.
+          🔒 — встроенная мелодия (только для чтения),
+          остальные — пользовательские (созданные в редакторе).
+        fields:
+          - name: 'MELODY_NAME'
+            type: 'dropdown'
+            dynamic: 'melodies'
+        inputs: []
+
+      - id: 'wedo_sound_define'
+        name: 'Определить мелодию'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          Открыть редактор мелодий. Позволяет создать или
+          изменить пользовательскую мелодию.
+          Встроенные мелодии можно копировать в пользовательские.
+        fields: []
+        inputs: []
+
+      - id: 'wedo_sound_play_until_done'
+        name: 'Играть мелодию до конца'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v3.x).
+          Проиграть мелодию и дождаться её завершения,
+          прежде чем продолжить выполнение программы.
+        fields:
+          - name: 'MELODY_NAME'
+            type: 'dropdown'
+            dynamic: 'melodies'
+        inputs: []
+
+      - id: 'wedo_sound_stop'
+        name: 'Остановить звук'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v3.x).
+          Прервать воспроизведение текущей мелодии или ноты.
+        fields: []
+        inputs: []
+
+      - id: 'wedo_sound_volume'
+        name: 'Громкость'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v3.x).
+          Установить уровень громкости (0..100%) для воспроизведения
+          нот и мелодий через компьютер.
+        fields: []
+        inputs:
+          - name: 'VOLUME'
+            check: 'Number'
+            label: '%'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 50 }
+
+      - id: 'wedo_sound_record'
+        name: 'Записать звук'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v3.1.0, см. TODO #44).
+          Записать звук с микрофона и сохранить его в проект.
+          Требуется разрешение пользователя (MediaStream API).
+        fields:
+          - name: 'DURATION'
+            type: 'dropdown'
+            options:
+              - { label: '1 секунда', value: '1000' }
+              - { label: '2 секунды', value: '2000' }
+              - { label: '3 секунды', value: '3000' }
+              - { label: '5 секунд', value: '5000' }
+        inputs:
+          - name: 'NAME'
+            check: 'String'
+            label: 'имя'
+            shadow:
+              type: 'text'
+              fields: { TEXT: 'моя_запись' }
+
+      - id: 'wedo_sound_play_recording'
+        name: 'Играть запись'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v3.1.0).
+          Проиграть ранее записанный звук по имени.
+        fields:
+          - name: 'NAME'
+            type: 'dropdown'
+            dynamic: 'recordings'
+        inputs: []
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: ДАТЧИКИ (sensors)
+  # ===========================================================================
+  - id: 'sensors'
+    name: 'Датчики'
+    colour: '#FF6584'
+    icon: '📡'
+    blocks:
+      - id: 'wedo_sensor_motion'
+        name: 'РасстояниеСм'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: 'Примерное расстояние до объекта в сантиметрах. 0 см — вплотную, 17 см — далеко.'
+        fields: []
+        inputs: []
+
+      - id: 'wedo_sensor_distance_equal'
+        name: 'РасстояниеРавно'
+        tags: 'full'
+        type: 'value'
+        output: 'Boolean'
+        tooltip: 'Проверка условия по расстоянию: Рядом (0-5 см), Не далеко (6-11 см), Далеко (12+ см).'
+        fields:
+          - name: 'DIST'
+            type: 'dropdown'
+            options:
+              - { label: 'Рядом', value: 'near' }
+              - { label: 'Не далеко', value: 'medium' }
+              - { label: 'Далеко', value: 'far' }
+        inputs: []
+
+      - id: 'wedo_sensor_tilt_pitch'
+        name: 'НаклонВперёдНазад'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: 'Угол наклона датчика вперёд/назад в градусах. Использует режим "Углы".'
+        fields: []
+        inputs: []
+
+      - id: 'wedo_sensor_tilt_roll'
+        name: 'НаклонВлевоВправо'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: 'Угол наклона датчика влево/вправо в градусах. Использует режим "Углы".'
+        fields: []
+        inputs: []
+
+      - id: 'wedo_sensor_tilt_direction'
+        name: 'НаправлениеНаклона'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: |
+          Направление наклона датчика (код).
+          0 - нейтрально, 3 - назад, 5 - вправо, 7 - влево, 9 - вперёд, 10 - неизвестно.
+        fields: []
+        inputs: []
+
+      - id: 'wedo_sensor_tilt_equal'
+        name: 'НаклонРавен'
+        tags: 'full'
+        type: 'value'
+        output: 'Boolean'
+        tooltip: 'Проверка, находится ли датчик в одном из предопределенных положений.'
+        fields:
+          - name: 'TILT'
+            type: 'dropdown'
+            options:
+              - { label: 'нейтрально', value: '0' }
+              - { label: 'назад', value: '3' }
+              - { label: 'вправо', value: '5' }
+              - { label: 'влево', value: '7' }
+              - { label: 'вперёд', value: '9' }
+        inputs: []
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: ЦИКЛЫ (loops)
+  # ===========================================================================
+  - id: 'loops'
+    name: 'Циклы'
+    colour: '#FF8C1A'
+    icon: '🔄'
+    blocks:
+      - id: 'controls_repeat_ext'
+        name: 'Повторить'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Повторить блоки внутри указанное количество раз.'
+        fields: []
+        inputs:
+          - name: 'TIMES'
+            check: 'Number'
+            label: 'раз'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 10 }
+        statements:
+          - name: 'DO'
+
+      - id: 'controls_whileUntil'
+        name: 'Пока/До'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Повторять блоки, пока условие истинно (Пока) или ложно (До).'
+        fields:
+          - name: 'MODE'
+            type: 'dropdown'
+            options:
+              - { label: 'Пока', value: 'WHILE' }
+              - { label: 'До', value: 'UNTIL' }
+        inputs:
+          - name: 'BOOL'
+            check: 'Boolean'
+        statements:
+          - name: 'DO'
+
+      - id: 'wedo_wait'
+        name: 'Ждать'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Пауза в выполнении программы на указанное количество секунд.'
+        fields: []
+        inputs:
+          - name: 'SECONDS'
+            check: 'Number'
+            label: 'секунд'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 1 }
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: УСЛОВИЯ (logic)
+  # ===========================================================================
+  - id: 'logic'
+    name: 'Условия'
+    colour: '#A0A0A0'
+    icon: '🔀'
+    blocks:
+      - id: 'controls_if'
+        name: 'Если'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Выполнить блоки, если условие истинно. Можно добавить "иначе если" и "иначе".'
+        fields: []
+        inputs:
+          - name: 'IF0'
+            check: 'Boolean'
+        statements:
+          - name: 'DO0'
+          - name: 'ELSE'
+        mutator: true
+
+      - id: 'logic_compare'
+        name: 'Сравнение'
+        tags: 'full'
+        type: 'value'
+        output: 'Boolean'
+        tooltip: 'Сравнить два значения (=, ≠, <, ≤, >, ≥). Работает и для чисел, и для строк.'
+        fields:
+          - name: 'OP'
+            type: 'dropdown'
+            options:
+              - { label: '=', value: 'EQ' }
+              - { label: '≠', value: 'NEQ' }
+              - { label: '<', value: 'LT' }
+              - { label: '≤', value: 'LTE' }
+              - { label: '>', value: 'GT' }
+              - { label: '≥', value: 'GTE' }
+        inputs:
+          - name: 'A'
+          - name: 'B'
+
+      - id: 'logic_operation'
+        name: 'И/Или'
+        tags: 'full'
+        type: 'value'
+        output: 'Boolean'
+        tooltip: 'Логические операции И (and) / ИЛИ (or).'
+        fields:
+          - name: 'OP'
+            type: 'dropdown'
+            options:
+              - { label: 'и', value: 'AND' }
+              - { label: 'или', value: 'OR' }
+        inputs:
+          - name: 'A'
+            check: 'Boolean'
+          - name: 'B'
+            check: 'Boolean'
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: ПЕРЕМЕННЫЕ (variables)
+  # ===========================================================================
+  - id: 'variables'
+    name: 'Переменные'
+    colour: '#A55BCE'
+    icon: '📦'
+    categorystyle: 'variable_category'
+    blocks:
+      - id: 'variables_get'
+        name: 'Получить'
+        tags: 'full'
+        type: 'value'
+        tooltip: 'Получить значение переменной.'
+        fields:
+          - name: 'VAR'
+            type: 'variable'
+        inputs: []
+
+      - id: 'variables_set'
+        name: 'Присвоить'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Присвоить переменной новое значение.'
+        fields:
+          - name: 'VAR'
+            type: 'variable'
+        inputs:
+          - name: 'VALUE'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 0 }
+
+      - id: 'math_change'
+        name: 'Увеличить'
+        tags: 'full'
+        type: 'statement'
+        tooltip: 'Увеличить значение переменной на заданное число.'
+        fields:
+          - name: 'VAR'
+            type: 'variable'
+        inputs:
+          - name: 'DELTA'
+            check: 'Number'
+            label: 'на'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 1 }
+
+      # --- ЗАПЛАНИРОВАННЫЕ БЛОКИ (FUTURE) ---
+      # См. TODO #32: текстовые переменные
+
+      - id: 'wedo_text_variable'
+        name: 'Текстовая переменная'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v2.8.0, см. TODO #32).
+          Объявить текстовую переменную (строку).
+          Отличается от обычной переменной тем, что хранит текст,
+          а не число.
+        fields:
+          - name: 'VAR'
+            type: 'variable'
+        inputs:
+          - name: 'VALUE'
+            check: 'String'
+            shadow:
+              type: 'text'
+              fields: { TEXT: 'текст' }
+
+      - id: 'wedo_text_set'
+        name: 'Присвоить текст'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v2.8.0, см. TODO #32).
+          Присвоить текстовой переменной новое значение.
+        fields:
+          - name: 'VAR'
+            type: 'variable'
+        inputs:
+          - name: 'VALUE'
+            check: 'String'
+            shadow:
+              type: 'text'
+              fields: { TEXT: 'новый текст' }
+
+      - id: 'wedo_text_replace'
+        name: 'Заменить текст'
+        tags: 'future'
+        type: 'statement'
+        tooltip: |
+          ⏳ Запланировано (v2.8.0, см. TODO #32).
+          Заменить часть текста в текстовой переменной.
+        fields:
+          - name: 'VAR'
+            type: 'variable'
+        inputs:
+          - name: 'FIND'
+            check: 'String'
+            label: 'найти'
+            shadow:
+              type: 'text'
+              fields: { TEXT: 'что' }
+          - name: 'REPLACE'
+            check: 'String'
+            label: 'заменить на'
+            shadow:
+              type: 'text'
+              fields: { TEXT: 'на что' }
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: МАТЕМАТИКА (math)
+  # ===========================================================================
+  - id: 'math'
+    name: 'Математика'
+    colour: '#59C059'
+    icon: '➗'
+    blocks:
+      - id: 'math_number'
+        name: 'Число'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: 'Числовое значение.'
+        fields:
+          - name: 'NUM'
+            type: 'number'
+        inputs: []
+
+      - id: 'text'
+        name: 'Текст'
+        tags: 'full'
+        type: 'value'
+        output: 'String'
+        tooltip: 'Текстовая константа. Можно вставить в блок "Вывести", в условие или в текстовую переменную.'
+        fields:
+          - name: 'TEXT'
+            type: 'text'
+        inputs: []
+
+      - id: 'math_arithmetic'
+        name: 'Арифметика'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: 'Основные арифметические операции: +, -, *, /.'
+        fields:
+          - name: 'OP'
+            type: 'dropdown'
+            options:
+              - { label: '+', value: 'ADD' }
+              - { label: '-', value: 'MINUS' }
+              - { label: '×', value: 'MULTIPLY' }
+              - { label: '÷', value: 'DIVIDE' }
+        inputs:
+          - name: 'A'
+            check: 'Number'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 1 }
+          - name: 'B'
+            check: 'Number'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 1 }
+
+      - id: 'math_round'
+        name: 'Округлить'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: 'Округлить число до ближайшего целого.'
+        fields:
+          - name: 'OP'
+            type: 'dropdown'
+            options:
+              - { label: 'округлить', value: 'ROUND' }
+              - { label: 'округлить вверх', value: 'ROUNDUP' }
+              - { label: 'округлить вниз', value: 'ROUNDDOWN' }
+        inputs:
+          - name: 'NUM'
+            check: 'Number'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 3.1 }
+
+      - id: 'math_random_int'
+        name: 'Случайное число'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: 'Случайное целое число в диапазоне.'
+        fields: []
+        inputs:
+          - name: 'FROM'
+            check: 'Number'
+            label: 'от'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 1 }
+          - name: 'TO'
+            check: 'Number'
+            label: 'до'
+            shadow:
+              type: 'math_number'
+              fields: { NUM: 100 }
+
+  # ===========================================================================
+  # КАТЕГОРИЯ: ОТЛАДКА (debug)
+  # ===========================================================================
+  - id: 'debug'
+    name: 'Отладка'
+    colour: '#95A5A6'
+    icon: '🔧'
+    allowed_roles: ['admin']
+    blocks:
+      - id: 'wedo_debug_raw'
+        name: 'СыроеЗначение'
+        tags: 'full'
+        type: 'value'
+        output: 'String'
+        tooltip: 'Отладка: сырые байты, полученные с порта (hex).'
+        fields:
+          - name: 'PORT'
+            type: 'dropdown'
+            options:
+              - { label: 'Порт 1', value: '1' }
+              - { label: 'Порт 2', value: '2' }
+        inputs: []
+
+      - id: 'wedo_debug_port_type'
+        name: 'ТипУстройства'
+        tags: 'full'
+        type: 'value'
+        output: 'String'
+        tooltip: 'Отладка: тип устройства, подключённого к порту.'
+        fields:
+          - name: 'PORT'
+            type: 'dropdown'
+            options:
+              - { label: 'Порт 1', value: '1' }
+              - { label: 'Порт 2', value: '2' }
+        inputs: []
+
+      - id: 'wedo_debug_tilt_mode'
+        name: 'РежимНаклона'
+        tags: 'full'
+        type: 'value'
+        output: 'Number'
+        tooltip: 'Отладка: текущий режим датчика наклона (0=углы, 1=направление).'
+        fields: []
+        inputs: []

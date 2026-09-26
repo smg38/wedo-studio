@@ -14,7 +14,7 @@
 # ---     "Категория.ИмяБлока" (например: "Управление.Подключить хаб").
 # ---   - Поле 'tags' — метка набора, к которому относится блок.
 # ---     Значение из списка meta.tags. Служит для фильтрации блоков
-# ---     при генерации toolbox (например, только 'full' для основного набора).
+# ---     при генерации toolbox (например, только ['full','8+'] для основного набора).
 # ---
 # --- ТЕГИ:
 # ---   full     — реализованные и работающие блоки (основной набор)
@@ -37,6 +37,7 @@ meta:
     - 'advanced'  # Продвинутый набор
     - 'debug'     # Только для отладки (админам)
     - 'future'    # Запланированные блоки (ещё не реализованы)
+    - '8+'        # Набор для детей 8+ (все блоки, кроме "только для взрослых")
 
 # =============================================================================
 # --- ОПИСАНИЕ КАТЕГОРИЙ И БЛОКОВ ---
@@ -53,7 +54,7 @@ categories:
     blocks:
       - id: 'event_whenflagclicked'
         name: 'Когда щелкнут по флагу'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'event'
         tooltip: 'Точка входа в программу. Выполнение начинается отсюда.'
         deletable: false
@@ -61,14 +62,14 @@ categories:
 
       - id: 'wedo_connect'
         name: 'Подключить хаб'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Подключение к хабу WeDo 2.0 через Bluetooth.'
         fields: []
 
       - id: 'wedo_output'
         name: 'Вывести'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: |
           Вывести значение в панель вывода.
@@ -86,7 +87,7 @@ categories:
 # ===========================================================================
       - id: 'wedo_parallel'
         name: 'Запустить параллельно'
-        tags: 'future'   # TODO #43, v3.1.0
+        tags: ['future']   # TODO #43, v3.1.0
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v3.1.0, см. TODO #43).
@@ -98,7 +99,7 @@ categories:
 
       - id: 'wedo_parallel_stop'
         name: 'Остановить задачу'
-        tags: 'future'   # TODO #43, v3.1.0
+        tags: ['future']   # TODO #43, v3.1.0
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v3.1.0, см. TODO #43).
@@ -119,7 +120,7 @@ categories:
     blocks:
       - id: 'wedo_event_keypressed'
         name: 'По клавише'
-        tags: 'future'   # TODO #30, v2.8.0
+        tags: ['future']   # TODO #30, v2.8.0
         type: 'event'
         tooltip: |
           ⏳ Запланировано (v2.8.0, см. TODO #30).
@@ -138,7 +139,7 @@ categories:
 
       - id: 'wedo_event_if'
         name: 'Если'
-        tags: 'future'   # TODO #30, v2.8.0
+        tags: ['future']   # TODO #30, v2.8.0
         type: 'event'
         tooltip: |
           ⏳ Запланировано (v2.8.0, см. TODO #30).
@@ -150,7 +151,7 @@ categories:
 
       - id: 'wedo_event_timer'
         name: 'Через X сек'
-        tags: 'future'   # TODO #30, v2.8.0
+        tags: ['future']   # TODO #30, v2.8.0
         type: 'event'
         tooltip: |
           ⏳ Запланировано (v2.8.0, см. TODO #30).
@@ -174,7 +175,7 @@ categories:
     blocks:
       - id: 'wedo_motor_on'
         name: 'Мотор включить'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Включить мотор на выбранном порту. Скорость от -100% (назад) до 100% (вперед).'
         fields:
@@ -193,7 +194,7 @@ categories:
 
       - id: 'wedo_motor_off'
         name: 'Мотор выключить'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Остановить мотор на выбранном порту.'
         fields:
@@ -208,7 +209,7 @@ categories:
 # ===========================================================================
       - id: 'wedo_motor_ramp'
         name: 'Плавно до A за B сек'
-        tags: 'future'   # TODO #27, v2.7.0
+        tags: ['future']   # TODO #27, v2.7.0
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v2.7.0, см. TODO #27).
@@ -244,7 +245,7 @@ categories:
     blocks:
       - id: 'wedo_led_named'
         name: 'LED цвет'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Установить один из предопределенных цветов LED-подсветки хаба.'
         fields:
@@ -266,7 +267,7 @@ categories:
 
       - id: 'wedo_led_variable'
         name: 'LED цвет (число)'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Установить цвет LED-подсветки по его числовому индексу (0-10). Можно использовать переменную.'
         fields: []
@@ -287,7 +288,7 @@ categories:
     blocks:
       - id: 'wedo_sound_target'
         name: 'Установить устройство'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           Выбрать, где воспроизводится звук:
@@ -304,7 +305,7 @@ categories:
 
       - id: 'wedo_sound_note'
         name: 'Играть ноту'
-        tags: 'future'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Проиграть музыкальную ноту указанной длительности.'
         fields:
@@ -329,7 +330,7 @@ categories:
 
       - id: 'wedo_sound_melody'
         name: 'Играть мелодию'
-        tags: 'future'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: |
           Проиграть мелодию по имени.
@@ -341,9 +342,21 @@ categories:
             dynamic: 'melodies'
         inputs: []
 
+      - id: 'wedo_sound_waveform'
+        name: 'Тембр'
+        tags: ['full','8+']
+        type: 'statement'
+        tooltip: |
+          Установить тембр звука:
+          Пианино (sine) — мягкий, чистый;
+          Труба (triangle) — яркий;
+          Резкий (square) — грубый;
+          Яркий (sawtooth) — жужжащий.
+        fields: []
+
       - id: 'wedo_sound_define'
         name: 'Определить мелодию'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           Открыть редактор мелодий. Позволяет создать или
@@ -354,7 +367,7 @@ categories:
 
       - id: 'wedo_sound_play_until_done'
         name: 'Играть мелодию до конца'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v3.x).
@@ -365,10 +378,29 @@ categories:
             type: 'dropdown'
             dynamic: 'melodies'
         inputs: []
+      - id: 'wedo_sound_volume'
+        name: 'Громкость'
+        tags: ['full','8+']
+        type: 'statement'
+        tooltip: |
+          Установить уровень громкости (0..100%) для воспроизведения
+          нот и мелодий через компьютер.
+        fields: []
+        # inputs удалены, так как блок использует FieldNumber в wedo-blocks.js
+
+      - id: 'wedo_sound_tempo'
+        name: 'Установить темп'
+        tags: ['full','8+']
+        type: 'statement'
+        tooltip: |
+          Установить скорость воспроизведения мелодий (ударов в минуту).
+          По умолчанию 120 BPM. Влияет на длительность нот, указанных как доли (q, h, 8...).
+        fields: []
+        # inputs удалены, так как блок использует FieldNumber в wedo-blocks.js
 
       - id: 'wedo_sound_stop'
         name: 'Остановить звук'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v3.x).
@@ -376,26 +408,9 @@ categories:
         fields: []
         inputs: []
 
-      - id: 'wedo_sound_volume'
-        name: 'Громкость'
-        tags: 'future'
-        type: 'statement'
-        tooltip: |
-          ⏳ Запланировано (v3.x).
-          Установить уровень громкости (0..100%) для воспроизведения
-          нот и мелодий через компьютер.
-        fields: []
-        inputs:
-          - name: 'VOLUME'
-            check: 'Number'
-            label: '%'
-            shadow:
-              type: 'math_number'
-              fields: { NUM: 50 }
-
       - id: 'wedo_sound_record'
         name: 'Записать звук'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v3.1.0, см. TODO #44).
@@ -419,7 +434,7 @@ categories:
 
       - id: 'wedo_sound_play_recording'
         name: 'Играть запись'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v3.1.0).
@@ -440,7 +455,7 @@ categories:
     blocks:
       - id: 'wedo_sensor_motion'
         name: 'РасстояниеСм'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Number'
         tooltip: 'Примерное расстояние до объекта в сантиметрах. 0 см — вплотную, 17 см — далеко.'
@@ -449,7 +464,7 @@ categories:
 
       - id: 'wedo_sensor_distance_equal'
         name: 'РасстояниеРавно'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Boolean'
         tooltip: 'Проверка условия по расстоянию: Рядом (0-5 см), Не далеко (6-11 см), Далеко (12+ см).'
@@ -464,7 +479,7 @@ categories:
 
       - id: 'wedo_sensor_tilt_pitch'
         name: 'НаклонВперёдНазад'
-        tags: 'full'
+        tags: ['full']
         type: 'value'
         output: 'Number'
         tooltip: 'Угол наклона датчика вперёд/назад в градусах. Использует режим "Углы".'
@@ -473,7 +488,7 @@ categories:
 
       - id: 'wedo_sensor_tilt_roll'
         name: 'НаклонВлевоВправо'
-        tags: 'full'
+        tags: ['full']
         type: 'value'
         output: 'Number'
         tooltip: 'Угол наклона датчика влево/вправо в градусах. Использует режим "Углы".'
@@ -482,7 +497,7 @@ categories:
 
       - id: 'wedo_sensor_tilt_direction'
         name: 'НаправлениеНаклона'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Number'
         tooltip: |
@@ -493,7 +508,7 @@ categories:
 
       - id: 'wedo_sensor_tilt_equal'
         name: 'НаклонРавен'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Boolean'
         tooltip: 'Проверка, находится ли датчик в одном из предопределенных положений.'
@@ -518,7 +533,7 @@ categories:
     blocks:
       - id: 'controls_repeat_ext'
         name: 'Повторить'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Повторить блоки внутри указанное количество раз.'
         fields: []
@@ -534,7 +549,7 @@ categories:
 
       - id: 'controls_whileUntil'
         name: 'Пока/До'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Повторять блоки, пока условие истинно (Пока) или ложно (До).'
         fields:
@@ -551,7 +566,7 @@ categories:
 
       - id: 'wedo_wait'
         name: 'Ждать'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Пауза в выполнении программы на указанное количество секунд.'
         fields: []
@@ -573,7 +588,7 @@ categories:
     blocks:
       - id: 'controls_if'
         name: 'Если'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Выполнить блоки, если условие истинно. Можно добавить "иначе если" и "иначе".'
         fields: []
@@ -587,7 +602,7 @@ categories:
 
       - id: 'logic_compare'
         name: 'Сравнение'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Boolean'
         tooltip: 'Сравнить два значения (=, ≠, <, ≤, >, ≥). Работает и для чисел, и для строк.'
@@ -607,7 +622,7 @@ categories:
 
       - id: 'logic_operation'
         name: 'И/Или'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Boolean'
         tooltip: 'Логические операции И (and) / ИЛИ (or).'
@@ -634,7 +649,7 @@ categories:
     blocks:
       - id: 'variables_get'
         name: 'Получить'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         tooltip: 'Получить значение переменной.'
         fields:
@@ -644,7 +659,7 @@ categories:
 
       - id: 'variables_set'
         name: 'Присвоить'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Присвоить переменной новое значение.'
         fields:
@@ -658,7 +673,7 @@ categories:
 
       - id: 'math_change'
         name: 'Увеличить'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'statement'
         tooltip: 'Увеличить значение переменной на заданное число.'
         fields:
@@ -677,7 +692,7 @@ categories:
 
       - id: 'wedo_text_variable'
         name: 'Текстовая переменная'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v2.8.0, см. TODO #32).
@@ -696,7 +711,7 @@ categories:
 
       - id: 'wedo_text_set'
         name: 'Присвоить текст'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v2.8.0, см. TODO #32).
@@ -713,7 +728,7 @@ categories:
 
       - id: 'wedo_text_replace'
         name: 'Заменить текст'
-        tags: 'future'
+        tags: ['future']
         type: 'statement'
         tooltip: |
           ⏳ Запланировано (v2.8.0, см. TODO #32).
@@ -745,7 +760,7 @@ categories:
     blocks:
       - id: 'math_number'
         name: 'Число'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Number'
         tooltip: 'Числовое значение.'
@@ -756,7 +771,7 @@ categories:
 
       - id: 'text'
         name: 'Текст'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'String'
         tooltip: 'Текстовая константа. Можно вставить в блок "Вывести", в условие или в текстовую переменную.'
@@ -765,9 +780,31 @@ categories:
             type: 'text'
         inputs: []
 
+      - id: 'text_join'
+        name: 'Соединить'
+        tags: ['full','8+']
+        type: 'value'
+        output: 'String'
+        tooltip: |
+          Соединить два и более значений в одну строку.
+          Слева — текст или число, справа можно добавить ещё поля.
+        fields: []
+        inputs:
+          - name: 'ADD0'
+            check: null
+            shadow:
+              type: 'text'
+              fields: { TEXT: 'Привет ' }
+          - name: 'ADD1'
+            check: null
+            shadow:
+              type: 'text'
+              fields: { TEXT: 'мир' }
+        mutator: true
+
       - id: 'math_arithmetic'
         name: 'Арифметика'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Number'
         tooltip: 'Основные арифметические операции: +, -, *, /.'
@@ -793,7 +830,7 @@ categories:
 
       - id: 'math_round'
         name: 'Округлить'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Number'
         tooltip: 'Округлить число до ближайшего целого.'
@@ -813,7 +850,7 @@ categories:
 
       - id: 'math_random_int'
         name: 'Случайное число'
-        tags: 'full'
+        tags: ['full','8+']
         type: 'value'
         output: 'Number'
         tooltip: 'Случайное целое число в диапазоне.'
@@ -843,7 +880,7 @@ categories:
     blocks:
       - id: 'wedo_debug_raw'
         name: 'СыроеЗначение'
-        tags: 'full'
+        tags: ['full']
         type: 'value'
         output: 'String'
         tooltip: 'Отладка: сырые байты, полученные с порта (hex).'
@@ -857,7 +894,7 @@ categories:
 
       - id: 'wedo_debug_port_type'
         name: 'ТипУстройства'
-        tags: 'full'
+        tags: ['full']
         type: 'value'
         output: 'String'
         tooltip: 'Отладка: тип устройства, подключённого к порту.'
@@ -871,7 +908,7 @@ categories:
 
       - id: 'wedo_debug_tilt_mode'
         name: 'РежимНаклона'
-        tags: 'full'
+        tags: ['full']
         type: 'value'
         output: 'Number'
         tooltip: 'Отладка: текущий режим датчика наклона (0=углы, 1=направление).'

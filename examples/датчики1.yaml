@@ -15,7 +15,7 @@ blocks:
       line: 3
       OP: GT
       A:
-        type: Датчики.Расстояние
+        type: Датчики.РасстояниеСм
         line: 4
       B: 9
     DO0:
@@ -31,7 +31,7 @@ blocks:
           line: 7
           OP: LTE
           A:
-            type: Датчики.Расстояние
+            type: Датчики.РасстояниеСм
             line: 8
           B: 9
         DO:

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- @file index.html | v2.8.2 | 2026-09-27 | @smg38 -->
+<!-- @file index.html | v2.9.0 | 2026-10-01 | @smg38 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WeDo Studio v2.8.2</title>
+<title>WeDo Studio v2.9.0</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <!-- Styles -->
 <link rel="stylesheet" href="css/landing.css">
@@ -20,6 +20,7 @@
 <!-- Config & API -->
 <script src="js/config.js"></script>
 <script src="js/api.js"></script>
+<script src="js/wedo-melodies-data.js"></script>
 <script src="js/wedo-audio-builtin.js"></script>
 <script src="js/wedo-audio.js"></script>
 <!-- App Components -->
@@ -29,6 +30,7 @@
 <script src="js/wedo-project-io.js"></script>
 <!-- Main App Logic -->
 <script src="js/wedo-app.js"></script>
+<script src="js/messages.js"></script>
 <script src="js/auth.js"></script>
 <style>
 html { scroll-behavior: smooth; }
@@ -140,7 +142,7 @@ html { scroll-behavior: smooth; }
 <h2 class="section-title">Как это работает</h2>
 <div class="screenshot-grid">
 <a href="media/screen1.png" target="_blank" class="screenshot-card">
-<img src="media/screen1.png" alt="Интерфейс WeDo Studio v2.8.2">
+<img src="media/screen1.png" alt="Интерфейс WeDo Studio v2.9.0">
 <div class="screenshot-caption">📱 Главный экран</div>
 </a>
 <a href="media/screen2.png" target="_blank" class="screenshot-card">
@@ -262,6 +264,10 @@ html { scroll-behavior: smooth; }
         <span class="close-auth" onclick="auth.hideFeedbackForm()">&times;</span>
         <h2>💬 Задать вопрос администрации</h2>
         <form onsubmit="event.preventDefault(); auth.submitFeedback();">
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+                <label for="fb-website">Website</label>
+                <input type="text" id="fb-website" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-group">
                 <label for="fb-from">👤 От кого *</label>
                 <input type="text" id="fb-from" placeholder="Ваш логин или имя" required>
@@ -288,11 +294,65 @@ html { scroll-behavior: smooth; }
     </div>
 </div>
 
+<!-- === SETTINGS MODAL === -->
+<div id="settings-overlay" class="auth-overlay">
+    <div class="auth-card">
+        <span class="close-auth" onclick="app.closeSettings()">&times;</span>
+        <h2 id="settings-title">Настройки</h2>
+        <div id="settings-demo-notice" class="settings-notice" style="display:none;"></div>
+        <form onsubmit="event.preventDefault(); app.settingsSubmit();">
+            <div class="form-group">
+                <label for="settings-login">👤 Логин</label>
+                <input type="text" id="settings-login" required>
+                <small id="settings-login-hint" class="field-hint"></small>
+            </div>
+            <div class="form-group">
+                <label for="settings-name">📛 Имя</label>
+                <input type="text" id="settings-name">
+            </div>
+            <div class="form-group">
+                <label for="settings-email">📧 Email</label>
+                <input type="email" id="settings-email">
+            </div>
+            <div class="form-group">
+                <label for="settings-password">🔒 Пароль</label>
+                <input type="password" id="settings-password" minlength="6">
+                <small id="settings-password-hint" class="field-hint"></small>
+            </div>
+            <button type="submit" id="settings-submit" class="btn btn-primary" style="width:100%;">Сохранить</button>
+            <div id="settings-error" class="settings-error"></div>
+        </form>
+    </div>
+</div>
+
+<!-- === MESSAGES MODAL === -->
+<div id="messages-overlay" class="auth-overlay">
+    <div class="auth-card messages-card">
+        <span class="close-auth" onclick="messages.close()">&times;</span>
+        <h2>💬 Сообщения</h2>
+        <div class="messages-tabs">
+            <button class="tab active" data-tab="inbox" onclick="messages.switchTab('inbox')">Входящие <span class="tab-count" id="inbox-count"></span></button>
+            <button class="tab" data-tab="sent" onclick="messages.switchTab('sent')">Отправленные</button>
+        </div>
+        <div id="messages-list" class="messages-list"><div class="messages-empty">Откройте сообщения</div></div>
+        <div id="message-reply-context" class="reply-context" style="display:none;">
+            <div class="reply-context-inner"><span class="reply-label">Ответ на:</span> <span id="reply-context-text"></span></div>
+            <button class="reply-cancel" onclick="messages.cancelReply()" aria-label="Отменить ответ">×</button>
+        </div>
+        <div class="messages-compose">
+            <select id="msg-to" class="msg-field" aria-label="Получатель"></select>
+            <textarea id="msg-text" class="msg-field" placeholder="Текст сообщения" maxlength="4000"></textarea>
+            <div class="compose-actions"><span id="msg-counter">0 / 4000</span><button class="btn btn-primary" onclick="messages.send()">Отправить</button></div>
+            <div id="msg-status" class="msg-status" aria-live="polite"></div>
+        </div>
+    </div>
+</div>
+
 <!-- === MAIN APP === -->
 <div id="app-container">
 <div id="blocklyDiv"></div>
 <div id="sidebar">
-<h2 class="app-title">WeDo Studio v2.8.2</h2>
+<h2 class="app-title">WeDo Studio v2.9.0</h2>
 <input type="text" id="project-name" placeholder="Название проекта">
 <button id="btn-hub" class="app-btn btn-connect" onclick="app.connect()">🔌 Подключить хаб</button>
 <div class="btn-group">
@@ -339,12 +399,17 @@ html { scroll-behavior: smooth; }
 </div>
 <!-- КОНСОЛЬ ВЫВОДА (панель) -->
 <div id="output-panel"></div>
+<div class="btn-group">
+<button class="app-btn btn-messages" onclick="messages.open()">💬 Сообщения <span id="unread-badge" class="badge" style="display:none;">0</span></button>
+</div>
 <div style="margin-top:10px;">
 <p class="examples-label">📚 Примеры программ:</p>
-<ul id="examples-list"></ul>
+<select id="examples-select" class="examples-select" aria-label="Примеры программ">
+<option value="">Выберите пример</option>
+</select>
 </div>
 <div id="log">Готов к работе...</div>
-<div class="status-bar">Author: '@smg38' | Apache 2.0 | v2.8.2</div>
+<div class="status-bar">Author: '@smg38' | Apache 2.0 | v2.9.0</div>
 </div>
 </div>
 <!-- Меню пользователя -->
@@ -356,9 +421,6 @@ html { scroll-behavior: smooth; }
 <div id="user-menu-dropdown">
 <button class="user-menu-item" onclick="openUserSettings()">
 <span class="menu-icon">⚙️</span> Настройки
-</button>
-<button class="user-menu-item" onclick="changeUserName()">
-<span class="menu-icon">✏️</span> Сменить имя
 </button>
 <button class="user-menu-item" onclick="auth.showFeedbackForm()">
 <span class="menu-icon">💬</span> Задать вопрос

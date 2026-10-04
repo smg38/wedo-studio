@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<!-- @file index.html | v2.9.0 | 2026-10-01 | @smg38 -->
+<!-- @file index.html | v2.9.1 | 2026-10-01 | @smg38 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WeDo Studio v2.9.0</title>
+<title>WeDo Studio v2.9.1</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <!-- Styles -->
 <link rel="stylesheet" href="css/landing.css">
@@ -142,7 +142,7 @@ html { scroll-behavior: smooth; }
 <h2 class="section-title">Как это работает</h2>
 <div class="screenshot-grid">
 <a href="media/screen1.png" target="_blank" class="screenshot-card">
-<img src="media/screen1.png" alt="Интерфейс WeDo Studio v2.9.0">
+<img src="media/screen1.png" alt="Интерфейс WeDo Studio v2.9.1">
 <div class="screenshot-caption">📱 Главный экран</div>
 </a>
 <a href="media/screen2.png" target="_blank" class="screenshot-card">
@@ -342,7 +342,7 @@ html { scroll-behavior: smooth; }
         <div class="messages-compose">
             <select id="msg-to" class="msg-field" aria-label="Получатель"></select>
             <textarea id="msg-text" class="msg-field" placeholder="Текст сообщения" maxlength="4000"></textarea>
-            <div class="compose-actions"><span id="msg-counter">0 / 4000</span><button class="btn btn-primary" onclick="messages.send()">Отправить</button></div>
+            <div class="compose-actions"><span id="msg-counter">0 / 4000</span><button id="msg-send" class="btn btn-primary" onclick="messages.send()">Отправить</button></div>
             <div id="msg-status" class="msg-status" aria-live="polite"></div>
         </div>
     </div>
@@ -350,9 +350,10 @@ html { scroll-behavior: smooth; }
 
 <!-- === MAIN APP === -->
 <div id="app-container">
+    <button id="sidebar-toggle" class="mobile-sidebar-toggle" type="button" aria-controls="sidebar" aria-expanded="false" onclick="app.toggleSidebar()">☰ Панель</button>
 <div id="blocklyDiv"></div>
 <div id="sidebar">
-<h2 class="app-title">WeDo Studio v2.9.0</h2>
+<h2 class="app-title">WeDo Studio v2.9.1</h2>
 <input type="text" id="project-name" placeholder="Название проекта">
 <button id="btn-hub" class="app-btn btn-connect" onclick="app.connect()">🔌 Подключить хаб</button>
 <div class="btn-group">
@@ -409,7 +410,7 @@ html { scroll-behavior: smooth; }
 </select>
 </div>
 <div id="log">Готов к работе...</div>
-<div class="status-bar">Author: '@smg38' | Apache 2.0 | v2.9.0</div>
+<div class="status-bar">Author: '@smg38' | Apache 2.0 | v2.9.1</div>
 </div>
 </div>
 <!-- Меню пользователя -->

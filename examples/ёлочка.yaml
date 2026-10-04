@@ -13,30 +13,30 @@ blocks: &ref_0
   - type: Звук.Играть ноту
     line: 3
     NOTE: '440'
-    DUR: 500
+    DURATION: '4'
   - type: Звук.Играть ноту
     line: 4
     NOTE: '440'
-    DUR: 500
+    DURATION: '4'
   - type: Звук.Играть ноту
     line: 5
     NOTE: '330'
-    DUR: 500
+    DURATION: '4'
   - type: Звук.Играть ноту
     line: 6
     NOTE: '330'
-    DUR: 500
+    DURATION: '4'
   - type: Звук.Играть ноту
     line: 7
     NOTE: '349'
-    DUR: 500
+    DURATION: '4'
   - type: Звук.Играть ноту
     line: 8
     NOTE: '349'
-    DUR: 500
+    DURATION: '4'
   - type: Звук.Играть ноту
     line: 9
     NOTE: '330'
-    DUR: 1000
+    DURATION: '2'
 stacks:
   - *ref_0

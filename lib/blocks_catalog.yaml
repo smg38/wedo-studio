@@ -320,13 +320,16 @@ categories:
               - { label: 'Ля (A4)', value: '440' }
               - { label: 'Си (B4)', value: '494' }
               - { label: 'До (C5)', value: '523' }
-        inputs:
-          - name: 'DUR'
-            check: 'Number'
-            label: 'мс'
-            shadow:
-              type: 'math_number'
-              fields: { NUM: 500 }
+          - name: 'DURATION'
+            type: 'dropdown'
+            options:
+              - { label: '1', value: '1' }
+              - { label: '1/2', value: '2' }
+              - { label: '1/4', value: '4' }
+              - { label: '1/8', value: '8' }
+              - { label: '1/16', value: '16' }
+              - { label: '1/32', value: '32' }
+        inputs: []
 
       - id: 'wedo_sound_melody'
         name: 'Играть мелодию'

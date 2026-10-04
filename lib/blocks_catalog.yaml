@@ -455,7 +455,7 @@ categories:
     blocks:
       - id: 'wedo_sensor_motion'
         name: 'РасстояниеСм'
-        tags: ['full','8+']
+        tags: ['advanced']
         type: 'value'
         output: 'Number'
         tooltip: 'Примерное расстояние до объекта в сантиметрах. 0 см — вплотную, 17 см — далеко.'
@@ -479,7 +479,7 @@ categories:
 
       - id: 'wedo_sensor_tilt_pitch'
         name: 'НаклонВперёдНазад'
-        tags: ['full']
+        tags: ['advanced']
         type: 'value'
         output: 'Number'
         tooltip: 'Угол наклона датчика вперёд/назад в градусах. Использует режим "Углы".'
@@ -488,7 +488,7 @@ categories:
 
       - id: 'wedo_sensor_tilt_roll'
         name: 'НаклонВлевоВправо'
-        tags: ['full']
+        tags: ['advanced']
         type: 'value'
         output: 'Number'
         tooltip: 'Угол наклона датчика влево/вправо в градусах. Использует режим "Углы".'
@@ -497,7 +497,7 @@ categories:
 
       - id: 'wedo_sensor_tilt_direction'
         name: 'НаправлениеНаклона'
-        tags: ['full','8+']
+        tags: ['advanced']
         type: 'value'
         output: 'Number'
         tooltip: |
